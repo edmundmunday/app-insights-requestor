@@ -3,7 +3,7 @@ const rp = require("request-promise");
 const dotEnv = require("dotenv").config(); //Use the .env file to load the variables
 class AppInsightsRequester {
   /**
-   * @param {object} data - shared 'data' object holding the customer data.
+   * @param {object} data - shared 'data' object holding the customer data from the previous iteration of queries.
    * @param {string} query - the query to be run against AppInsights.
    * @param {string} attributeName - the name to be given to the attribute this query returns.
    */
@@ -22,7 +22,7 @@ class AppInsightsRequester {
   }
 
   /**
-   * - Makes a request to AppInsights using the data the class was instantiated with, sorts returned information into the 'data' object.
+   * - Makes a request to AppInsights using the query the class was instantiated with, sorts returned information into the 'data' object.
    * @returns {Promise} - when resolved, the data object will be populated with new information.
    */
   makeRequest() {
@@ -35,8 +35,6 @@ class AppInsightsRequester {
           reject(error);
         });
     });
-    // console.log("API Key", this._apiKey);
-    // console.log("App ID", this._appId);
   }
 
   /**
